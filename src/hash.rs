@@ -5,11 +5,13 @@ use crate::{
 use digest::{self, FixedOutput, HashMarker, OutputSizeUser, Update};
 use std::marker::PhantomData;
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Sha256;
-#[derive(Debug, Clone)]
+
+#[derive(Debug)]
 pub struct Sha512;
-#[derive(Debug, Clone)]
+
+#[derive(Debug)]
 pub struct Sha512_256;
 
 mod private {
@@ -48,7 +50,7 @@ mod private {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Hash<T: private::Alg> {
     handle: raw::SymmetricState,
     state: PhantomData<T>,
@@ -65,7 +67,7 @@ impl<T: private::Alg> Default for Hash<T> {
                     to_c_opt_opt_symmetric_key(None),
                     to_c_opt_options(None),
                 )
-                .unwrap()
+                    .unwrap()
             },
             state: PhantomData,
         }
